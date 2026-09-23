@@ -8,10 +8,10 @@
 
 1. Создайте файл `.env` на основе примера `.env.example`:
 ```
-   PORT=3000
-   ONEC_BASE_URL=[https://goshift.ru/demo_ut](https://goshift.ru/demo_ut)
-   ONEC_USER=odata.user
-   ONEC_PASSWORD=Emul-1C-UT-2026
+    PORT=3000
+    ONEC_BASE_URL=https://goshift.ru/demo_ut
+    ONEC_USER=odata.user
+    ONEC_PASSWORD=Emul-1C-UT-2026
 ```
 
 2. Запустите приложение одной командой:
