@@ -1,0 +1,60 @@
+<main class="page">
+  <div class="load-bar">
+    <input [(ngModel)]="orderRef" placeholder="Ref_Key заказа" />
+    <button (click)="load()" [disabled]="loading">{{ loading ? "Загрузка…" : "Открыть заказ" }}</button>
+  </div>
+
+  @if (error) {
+    <p class="error">{{ error }}</p>
+  }
+
+  @if (order) {
+    <h2>Заказ {{ order.number }} от {{ order.date | date:'dd.MM.yyyy' }} · {{ order.warehouseName }}</h2>
+
+    <table class="lines-table">
+      <thead>
+      <tr>
+        <th>Артикул</th><th>Наименование</th><th>Кол-во</th><th>Цена</th>
+        <th>Ставка</th><th>Сумма</th><th>НДС</th><th>С НДС</th><th>Остаток</th>
+      </tr>
+      </thead>
+      <tbody>
+        @for (l of order.lines; track l.article) {
+          <tr>
+            <td>{{ l.article }}</td>
+            <td>{{ l.name }}</td>
+            <td>{{ l.qty }}</td>
+            <td>{{ money(l.price) }}</td>
+            <td>{{ l.vatName }}</td>
+            <td>{{ money(l.amount) }}</td>
+            <td>{{ money(l.vatAmount) }}</td>
+            <td>{{ money(l.amountWithVat) }}</td>
+            <td>{{ l.stock }}</td>
+          </tr>
+        }
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan="5">Итого</td>
+        <td>{{ money(order.totals.amount) }}</td>
+        <td>{{ money(order.totals.vatAmount) }}</td>
+        <td>{{ money(order.totals.amountWithVat) }}</td>
+        <td></td>
+      </tr>
+      </tfoot>
+    </table>
+
+    <h3>Кто получает товар</h3>
+    <div class="customer-form">
+      <input [(ngModel)]="customer.lastName" placeholder="Фамилия" [class.invalid]="fieldErrors['lastName']" />
+      <input [(ngModel)]="customer.firstName" placeholder="Имя" [class.invalid]="fieldErrors['firstName']" />
+      <input [(ngModel)]="customer.middleName" placeholder="Отчество" />
+      <input [(ngModel)]="customer.phone" placeholder="Телефон" [class.invalid]="fieldErrors['phone']" />
+      <input [(ngModel)]="customer.email" placeholder="Почта" [class.invalid]="fieldErrors['email']" />
+    </div>
+
+    <button (click)="submit()" [disabled]="submitting">
+      {{ submitting ? "Формируем…" : "Сформировать документ" }}
+    </button>
+  }
+</main>

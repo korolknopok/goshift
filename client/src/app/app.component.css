@@ -1,0 +1,48 @@
+.page {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 0 16px;
+    font-size: 14px;
+}
+
+.load-bar {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.load-bar input {
+    flex: 1;
+    padding: 8px;
+}
+
+.error {
+    color: red;
+}
+
+.lines-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.lines-table th,
+.lines-table td {
+    border: 1px solid #ccc;
+    padding: 6px;
+}
+
+.customer-form {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.customer-form input {
+    padding: 8px;
+}
+
+.customer-form input.invalid {
+    border-color: red;
+    background: #fff0f0;
+}

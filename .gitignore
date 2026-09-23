@@ -1,0 +1,14 @@
+node_modules/
+
+dist/
+.angular/
+
+.idea/
+.vscode/
+.DS_Store
+
+.env
+
+.postman/
+postman/
+*.log
