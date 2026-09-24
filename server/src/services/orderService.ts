@@ -16,6 +16,13 @@ export async function loadOrder(orderRef: string) {
     odataFetchAll("AccumulationRegister_ТоварыНаСкладах/Balance"),
   ]);
 
+  if (order.DeletionMark) {
+    throw new Error(`Заказ ${order.Number} помечен на удаление в 1С — выдача по нему невозможна`);
+  }
+  if (!order.Posted) {
+    throw new Error(`Заказ ${order.Number} не проведён в 1С (статус «${order.Статус}») — выдача по непроведённому заказу невозможна`);
+  }
+
   const priceIncludesVat = Boolean(order.ЦенаВключаетНДС);
   const warehouseRef = order.Склад_Key as string;
 
